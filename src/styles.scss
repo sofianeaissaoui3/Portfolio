@@ -1,0 +1,220 @@
+// ── Google Fonts ──────────────────────────────────────────────
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap');
+
+// ── Design tokens ─────────────────────────────────────────────
+:root {
+  --bg-base:       #110d09;
+  --bg-card:       #2c1e12;
+  --bg-card-hover: #361f10;
+  --border:        #6a4422;
+
+  --orange-light:  #ffaa60;
+  --orange:        #e06020;
+  --bordeaux:      #9b2038;
+  --bordeaux-dark: #6e1224;
+
+  --text-primary:  #fefcf8;
+  --text-secondary:#ecd8b6;
+  --text-muted:    #d0b48e;
+
+  --gradient-accent: linear-gradient(135deg, var(--orange) 0%, var(--bordeaux) 100%);
+  --gradient-glow:   radial-gradient(ellipse at center, rgba(224,96,32,.2) 0%, transparent 70%);
+
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 40px;
+
+  --shadow-card: 0 4px 24px rgba(0,0,0,.4), 0 1px 4px rgba(224,96,32,.08);
+  --shadow-glow: 0 0 40px rgba(224,96,32,.35);
+}
+
+// ── Reset & base ──────────────────────────────────────────────
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+// ── Scrollbar ─────────────────────────────────────────────────
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-base); }
+::-webkit-scrollbar-thumb {
+  background: var(--orange);
+  border-radius: 3px;
+  &:hover { background: var(--orange-light); }
+}
+
+// ── Utility ───────────────────────────────────────────────────
+.section {
+  padding: 100px 0;
+  position: relative;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 700;
+  margin-bottom: 12px;
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section-subtitle {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin-bottom: 60px;
+  letter-spacing: .04em;
+}
+
+.tag {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  background: rgba(224,96,32,.15);
+  border: 1px solid rgba(224,96,32,.35);
+  color: var(--orange-light);
+}
+
+// ── Card ──────────────────────────────────────────────────────
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 28px;
+  box-shadow: var(--shadow-card);
+  transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-card), 0 0 30px rgba(224,96,32,.18);
+    border-color: rgba(224,96,32,.55);
+  }
+}
+
+// ── Separator ─────────────────────────────────────────────────
+.sep {
+  width: 60px;
+  height: 3px;
+  background: var(--gradient-accent);
+  border-radius: 2px;
+  margin-bottom: 48px;
+}
+
+// ── Animations ────────────────────────────────────────────────
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-10px); }
+}
+
+@keyframes pulse-ring {
+  0%   { transform: scale(1);   opacity: .6; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+@keyframes blob-drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25%  { transform: translate(40px, -60px) scale(1.08); }
+  50%  { transform: translate(-20px, 40px) scale(.94); }
+  75%  { transform: translate(60px, 20px) scale(1.04); }
+}
+
+// ── Background canvas ──────────────────────────────────────────
+.bg-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+
+  &.blob-1 {
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(224,96,32,.20) 0%, transparent 70%);
+    top: -200px;
+    right: -150px;
+    animation: blob-drift 22s ease-in-out infinite;
+  }
+
+  &.blob-2 {
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(155,32,56,.18) 0%, transparent 70%);
+    top: 40%;
+    left: -200px;
+    animation: blob-drift 28s ease-in-out infinite reverse;
+    animation-delay: -8s;
+  }
+
+  &.blob-3 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(224,96,32,.15) 0%, transparent 70%);
+    bottom: 0;
+    right: 10%;
+    animation: blob-drift 20s ease-in-out infinite;
+    animation-delay: -14s;
+  }
+}
+
+// Points décalés (motif hexagonal / diamant — pas de carrés)
+.dot-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,.18) 1.5px, transparent 1.5px),
+    radial-gradient(circle, rgba(255,255,255,.12) 1.5px, transparent 1.5px);
+  background-size:    44px 44px, 44px 44px;
+  background-position: 0 0,      22px 22px;
+}
+
+// Lignes diagonales fines orangées
+.noise-overlay {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    -60deg,
+    transparent,
+    transparent 28px,
+    rgba(224,96,32,.045) 28px,
+    rgba(224,96,32,.045) 29px
+  );
+}
+
+// ── App content sits above the canvas ─────────────────────────
+.app-content {
+  position: relative;
+  z-index: 1;
+}

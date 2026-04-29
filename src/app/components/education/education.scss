@@ -1,0 +1,232 @@
+// ── Conteneur principal ────────────────────────────────────────
+.edu-zigzag {
+  position: relative;
+  padding: 16px 0 8px;
+}
+
+// Trait vertical central
+.edu-center-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(224,96,32,.55) 6%,
+    var(--orange) 30%,
+    var(--bordeaux) 70%,
+    rgba(155,32,56,.45) 94%,
+    transparent
+  );
+  z-index: 0;
+}
+
+// ── Ligne (une formation) ──────────────────────────────────────
+.edu-row {
+  display: grid;
+  grid-template-columns: 1fr 56px 1fr;
+  align-items: center;
+  margin-bottom: 64px;
+  position: relative;
+
+  &:last-child { margin-bottom: 0; }
+}
+
+// ── Côtés gauche / droite ──────────────────────────────────────
+.edu-side {
+  &--left  { padding-right: 36px; display: flex; justify-content: flex-end; }
+  &--right { padding-left:  36px; }
+}
+
+// ── Point central ──────────────────────────────────────────────
+.edu-dot-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.edu-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--gradient-accent);
+  box-shadow: 0 0 14px rgba(224,96,32,.5);
+  position: relative;
+  flex-shrink: 0;
+  transition: transform .3s ease;
+
+  &--current {
+    transform: scale(1.35);
+    box-shadow: 0 0 0 5px rgba(224,96,32,.18), 0 0 22px rgba(224,96,32,.6);
+  }
+}
+
+.edu-dot-pulse {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid rgba(224,96,32,.4);
+  animation: pulse-ring 2s ease-out infinite;
+}
+
+// ── Carte formation ────────────────────────────────────────────
+.edu-card {
+  max-width: 420px;
+  width: 100%;
+  animation: fadeInUp .55s ease both;
+  position: relative;
+
+  // Connecteur horizontal vers le trait central
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 36px;
+    height: 1px;
+    background: linear-gradient(to right, rgba(224,96,32,.55), transparent);
+  }
+
+  // Carte à DROITE → connecteur sur le côté gauche
+  .edu-side--right & {
+    &::before {
+      left: -36px;
+      background: linear-gradient(to right, transparent, rgba(224,96,32,.55));
+    }
+  }
+
+  // Carte à GAUCHE → connecteur sur le côté droit
+  .edu-side--left & {
+    &::before {
+      right: -36px;
+      left: auto;
+      background: linear-gradient(to left, transparent, rgba(224,96,32,.55));
+    }
+  }
+
+  &--current {
+    border-color: rgba(224,96,32,.52);
+    box-shadow: var(--shadow-card), 0 0 30px rgba(224,96,32,.18);
+  }
+}
+
+.edu-card-inner {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  margin-bottom: 14px;
+}
+
+.edu-logo {
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: rgba(255,255,255,.06);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 6px;
+    filter: brightness(1.1);
+  }
+}
+
+.edu-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  background: rgba(224,96,32,.13);
+  border: 1px solid rgba(224,96,32,.3);
+  border-radius: 12px;
+  font-size: .74rem;
+  font-weight: 600;
+  color: var(--orange-light);
+  margin-bottom: 8px;
+  letter-spacing: .04em;
+}
+
+.edu-degree {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+  line-height: 1.35;
+}
+
+.edu-field {
+  font-size: .83rem;
+  color: var(--orange-light);
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.edu-school {
+  font-size: .85rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.edu-loc {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.edu-desc {
+  font-size: .87rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+
+.edu-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+// ── Mobile : toutes les cartes à droite ────────────────────────
+@media (max-width: 768px) {
+  .edu-center-line {
+    left: 10px;
+    transform: none;
+  }
+
+  .edu-row {
+    grid-template-columns: 22px 1fr;
+    margin-bottom: 40px;
+    align-items: flex-start;
+  }
+
+  .edu-dot-col {
+    grid-column: 1;
+    grid-row: 1;
+    padding-top: 18px;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  .edu-side--left,
+  .edu-side--right {
+    grid-column: 2;
+    grid-row: 1;
+    padding-left: 20px;
+    padding-right: 0;
+    justify-content: flex-start;
+    display: flex;
+  }
+
+  .edu-card {
+    max-width: 100%;
+
+    &::before { display: none; }
+  }
+}

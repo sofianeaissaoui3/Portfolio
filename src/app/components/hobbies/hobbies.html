@@ -1,0 +1,17 @@
+<section class="section hobbies-section" id="hobbies">
+  <div class="container">
+    <p class="section-title">{{ tr().hobbies_title }}</p>
+    <div class="sep"></div>
+    <p class="section-subtitle">{{ tr().hobbies_sub }}</p>
+
+    <div class="hobbies-grid">
+      @for (hobby of hobbies; track hobby.icon) {
+        <div class="hobby-card card">
+          <div class="hobby-icon">{{ hobby.icon }}</div>
+          <h3 class="hobby-title">{{ hobby.title[lang()] }}</h3>
+          <p class="hobby-desc">{{ hobby.description[lang()] }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,67 @@
+<section class="section" id="education">
+  <div class="container">
+    <p class="section-title">{{ tr().edu_title }}</p>
+    <div class="sep"></div>
+    <p class="section-subtitle">{{ tr().edu_sub }}</p>
+
+    <div class="edu-zigzag">
+      <div class="edu-center-line"></div>
+
+      @for (edu of educations; track edu.period; let i = $index) {
+        <div class="edu-row" [class.is-odd]="i % 2 !== 0">
+
+          <div class="edu-side edu-side--left">
+            @if (i % 2 !== 0) {
+              <div class="card edu-card" [class.edu-card--current]="edu.current">
+                <div class="edu-card-inner">
+                  @if (edu.logo) {
+                    <div class="edu-logo"><img [src]="edu.logo" [alt]="edu.school" /></div>
+                  }
+                  <div>
+                    <div class="edu-badge">{{ edu.period }}</div>
+                    <h3 class="edu-degree">{{ edu.degree[lang()] }}</h3>
+                    <p class="edu-field">{{ edu.field[lang()] }}</p>
+                    <p class="edu-school">{{ edu.school }} <span class="edu-loc">— {{ edu.location }}</span></p>
+                  </div>
+                </div>
+                <p class="edu-desc">{{ edu.description[lang()] }}</p>
+                <div class="edu-tags">
+                  @for (tag of edu.tags; track tag) { <span class="tag">{{ tag }}</span> }
+                </div>
+              </div>
+            }
+          </div>
+
+          <div class="edu-dot-col">
+            <div class="edu-dot" [class.edu-dot--current]="edu.current">
+              @if (edu.current) { <div class="edu-dot-pulse"></div> }
+            </div>
+          </div>
+
+          <div class="edu-side edu-side--right">
+            @if (i % 2 === 0) {
+              <div class="card edu-card" [class.edu-card--current]="edu.current">
+                <div class="edu-card-inner">
+                  @if (edu.logo) {
+                    <div class="edu-logo"><img [src]="edu.logo" [alt]="edu.school" /></div>
+                  }
+                  <div>
+                    <div class="edu-badge">{{ edu.period }}</div>
+                    <h3 class="edu-degree">{{ edu.degree[lang()] }}</h3>
+                    <p class="edu-field">{{ edu.field[lang()] }}</p>
+                    <p class="edu-school">{{ edu.school }} <span class="edu-loc">— {{ edu.location }}</span></p>
+                  </div>
+                </div>
+                <p class="edu-desc">{{ edu.description[lang()] }}</p>
+                <div class="edu-tags">
+                  @for (tag of edu.tags; track tag) { <span class="tag">{{ tag }}</span> }
+                </div>
+              </div>
+            }
+          </div>
+
+        </div>
+      }
+    </div>
+  </div>
+</section>

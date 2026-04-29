@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -v \"^[^a-zA-Z]*$\")",
+      "Bash(pdftotext /Users/macdesoso/Desktop/Projets_Université/Portfolio/portfolio-frontend/content/CV.pdf -)",
+      "Bash(python3 -c ' *)",
+      "Bash(brew install *)",
+      "Bash(npx ng *)",
+      "Bash(gh auth *)",
+      "Bash(git --version)",
+      "Bash(git init *)",
+      "Bash(git add *)"
+    ]
+  }
+}

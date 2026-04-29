@@ -1,0 +1,68 @@
+<section class="section contact-section" id="contact">
+  <div class="container">
+    <p class="section-title">{{ tr().contact_title }}</p>
+    <div class="sep"></div>
+    <p class="section-subtitle">{{ tr().contact_sub }}</p>
+
+    <div class="contact-grid">
+
+      <!-- Email -->
+      <a class="contact-card card" href="mailto:sofianeaissaoui3@gmail.com">
+        <div class="contact-icon">✉️</div>
+        <div>
+          <p class="contact-label">{{ tr().lbl_email }}</p>
+          <p class="contact-value">sofianeaissaoui3&#64;gmail.com</p>
+        </div>
+      </a>
+
+      <!-- Téléphone -->
+      <a class="contact-card card" href="tel:+33647662319">
+        <div class="contact-icon">📱</div>
+        <div>
+          <p class="contact-label">{{ tr().lbl_phone }}</p>
+          <p class="contact-value">(+33) 6 47 66 23 19</p>
+        </div>
+      </a>
+
+      <!-- Localisation -->
+      <div class="contact-card card">
+        <div class="contact-icon">📍</div>
+        <div>
+          <p class="contact-label">{{ tr().lbl_location }}</p>
+          <p class="contact-value">{{ tr().location_val }}</p>
+        </div>
+      </div>
+
+      <!-- Mobilité -->
+      <div class="contact-card card">
+        <div class="contact-icon">🚗</div>
+        <div>
+          <p class="contact-label">{{ tr().lbl_mobility }}</p>
+          <p class="contact-value">{{ tr().mobility_val }}</p>
+        </div>
+      </div>
+
+      <!-- Langues -->
+      <div class="contact-card contact-card--wide card">
+        <div class="contact-icon">🌍</div>
+        <div class="contact-lang-block">
+          <p class="contact-label">{{ tr().lbl_languages }}</p>
+          <div class="lang-grid">
+            @for (l of languages; track l.flag) {
+              <div class="lang-item">
+                <span class="lang-flag">{{ l.flag }}</span>
+                <span class="lang-name">{{ tr()[l.nameKey] }}</span>
+                <span class="lang-level">{{ tr()[l.levelKey] }}</span>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer class="portfolio-footer">
+    <p>{{ tr().footer }}</p>
+  </footer>
+</section>

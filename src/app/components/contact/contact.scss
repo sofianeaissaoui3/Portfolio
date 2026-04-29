@@ -1,0 +1,119 @@
+.contact-section {
+  padding-bottom: 0;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+
+  @media (max-width: 700px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// ── Contact card ───────────────────────────────────────────────
+.contact-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+
+  &--wide {
+    grid-column: 1 / -1;
+    align-items: flex-start;
+  }
+
+  &[href]:hover {
+    border-color: rgba(224,96,32,.5);
+    box-shadow: var(--shadow-card), 0 0 24px rgba(224,96,32,.15);
+    transform: translateY(-3px);
+  }
+}
+
+.contact-icon {
+  font-size: 1.8rem;
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  background: rgba(224,96,32,.1);
+  border: 1px solid rgba(224,96,32,.25);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-label {
+  font-size: .75rem;
+  font-weight: 600;
+  color: var(--orange-light);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.contact-value {
+  font-size: .95rem;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+// ── Languages grid ─────────────────────────────────────────────
+.contact-lang-block {
+  flex: 1;
+}
+
+.lang-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: 6px;
+
+  @media (max-width: 600px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.lang-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+}
+
+.lang-flag {
+  font-size: 1.4rem;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+
+.lang-name {
+  font-size: .88rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.lang-level {
+  font-size: .74rem;
+  color: var(--orange-light);
+  font-weight: 500;
+  letter-spacing: .03em;
+}
+
+// ── Footer ─────────────────────────────────────────────────────
+.portfolio-footer {
+  margin-top: 80px;
+  padding: 28px 24px;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: .82rem;
+  letter-spacing: .06em;
+}

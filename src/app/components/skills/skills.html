@@ -1,0 +1,31 @@
+<section class="section" id="skills">
+  <div class="container">
+    <p class="section-title">{{ tr().skills_title }}</p>
+    <div class="sep"></div>
+    <p class="section-subtitle">{{ tr().skills_sub }}</p>
+
+    <div class="skills-grid">
+      @for (group of skillGroups; track group.catKey) {
+        <div class="card skill-card">
+          <div class="skill-card-header">
+            <span class="skill-icon">{{ group.icon }}</span>
+            <h3>{{ tr()[group.catKey] }}</h3>
+          </div>
+          <div class="skill-list">
+            @for (skill of group.skills; track $index) {
+              <div class="skill-item">
+                <div class="skill-label">
+                  <span>{{ skillName(skill.name) }}</span>
+                  <span class="skill-pct">{{ skill.level }}%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-fill" [style.width.%]="skill.level"></div>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>

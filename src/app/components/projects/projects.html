@@ -1,0 +1,84 @@
+<section class="section projects-section" id="projects">
+  <div class="container">
+    <p class="section-title">{{ tr().projects_title }}</p>
+    <div class="sep"></div>
+    <p class="section-subtitle">{{ tr().projects_sub }}</p>
+
+    <div class="projects-grid">
+      @for (project of projects; track project.title) {
+        <div class="card project-card"
+             [class.has-gallery]="project.images?.length"
+             (click)="openGallery(project)">
+
+          <div class="project-cover" [style.background]="project.gradient">
+            @if (project.images?.[0]) {
+              <img [src]="project.images![0]" [alt]="project.title"
+                   class="project-img" (error)="hideImg($event)" />
+            }
+            @if ((project.images?.length ?? 0) > 1) {
+              <span class="gallery-badge">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+                {{ project.images!.length }}
+              </span>
+            }
+          </div>
+
+          <div class="project-body">
+            <div class="project-period">{{ project.period }}</div>
+            <h3 class="project-title">{{ project.title }}</h3>
+            <p class="project-desc">{{ project.description[lang()] }}</p>
+
+            <div class="project-tags">
+              @for (tag of project.tags; track tag) {
+                <span class="tag">{{ tag }}</span>
+              }
+            </div>
+
+            @if (project.link) {
+              <a [href]="project.link" target="_blank" class="project-link"
+                 (click)="$event.stopPropagation()">
+                {{ tr().see_project }}
+              </a>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+@if (selectedProject) {
+  <div class="lightbox-overlay" (click)="closeGallery()">
+    <div class="lightbox-box" (click)="$event.stopPropagation()">
+
+      <button class="lb-close" (click)="closeGallery()" aria-label="Fermer">✕</button>
+
+      <div class="lb-img-wrap">
+        <img [src]="selectedProject.images![galleryIndex]"
+             [alt]="selectedProject.title"
+             class="lb-img" />
+      </div>
+
+      @if ((selectedProject.images?.length ?? 0) > 1) {
+        <button class="lb-arrow lb-prev" (click)="prev()" aria-label="Précédent">‹</button>
+        <button class="lb-arrow lb-next" (click)="next()" aria-label="Suivant">›</button>
+
+        <div class="lb-dots">
+          @for (img of selectedProject.images!; track $index) {
+            <button class="lb-dot" [class.active]="$index === galleryIndex"
+                    (click)="galleryIndex = $index"></button>
+          }
+        </div>
+      }
+
+      <div class="lb-caption">
+        <span class="lb-title">{{ selectedProject.title }}</span>
+        @if ((selectedProject.images?.length ?? 0) > 1) {
+          <span class="lb-counter">{{ galleryIndex + 1 }} / {{ selectedProject.images!.length }}</span>
+        }
+      </div>
+
+    </div>
+  </div>
+}
